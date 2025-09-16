@@ -106,30 +106,4 @@ function handleResponse(response) {
     }
 }
 
-/**function signIn() {
-
-    
-     * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
-     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
-   
-    loginRequest.redirectUri = "/";
-    myMSALObj.loginRedirect(loginRequest);
-}
-
-function signOut() {
-
-    
-     * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
-     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
-     
-
-    // Choose which account to logout from by passing a username.
-    const logoutRequest = {
-        account: myMSALObj.getAccount({ username: username }),
-        postLogoutRedirectUri: '/signout', // remove this line if you would like navigate to index page after logout.
-
-    };
-
-    myMSALObj.logoutRedirect(logoutRequest);
-}
 
