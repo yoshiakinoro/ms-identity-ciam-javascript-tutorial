@@ -1,57 +1,25 @@
 // Create the main myMSALObj instance
 // configuration parameters are located at authConfig.js
-/** msal.PublicClientApplication.createPublicClientApplication(msalConfig)
+msal.PublicClientApplication.createPublicClientApplication(msalConfig)
     .then((obj) => {
         myMSALObj = obj;
-       */ /**
+        /**
          * A promise handler needs to be registered for handling the
          * response returned from redirect flow. For more information, visit:
          * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/initialization.md#redirect-apis
          */
-   /**     myMSALObj.handleRedirectPromise()
-    *    .then(handleResponse)
+        myMSALObj.handleRedirectPromise()
+        .then(handleResponse)
         .catch((error) => {
             console.error(error);
         });
     })
     .catch((error) => {
         console.error("Error creating MSAL PublicClientApplication:", error);
-    }); 
+    });
 
-*/
 let username = "";
 
-
-const msalInstance = new msal.PublicClientApplication(msalConfig);
-
-msalInstance.handleRedirectPromise()
-  .then((response) => {
-    if (response) {
-      const account = response.account;
-      msalInstance.setActiveAccount(account);
-      document.getElementById("welcome-div").classList.remove("d-none");
-      document.getElementById("welcome-div").innerText = `Welcome, ${account.username}`;
-      document.getElementById("signIn").classList.add("d-none");
-      document.getElementById("signOut").classList.remove("d-none");
-    } else {
-      const accounts = msalInstance.getAllAccounts();
-      if (accounts.length > 0) {
-        msalInstance.setActiveAccount(accounts[0]);
-        document.getElementById("welcome-div").classList.remove("d-none");
-        document.getElementById("welcome-div").innerText = `Welcome, ${accounts[0].username}`;
-        document.getElementById("signIn").classList.add("d-none");
-        document.getElementById("signOut").classList.remove("d-none");
-      }
-    }
-  })
-  .catch(err => console.error("Redirect error:", err));
-
-function signIn() {
-  msalInstance.loginRedirect(loginRequest); // ← authConfig.js の loginRequest を流用
-}
-function signOut() {
-  msalInstance.logoutRedirect();
-}
 
 function selectAccount() {
 
@@ -105,4 +73,31 @@ function handleResponse(response) {
         //         }
         //     });
     }
+}
+
+function signIn() {
+
+    /**
+     * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
+     */
+    loginRequest.redirectUri = "/";
+    myMSALObj.loginRedirect(loginRequest);
+}
+
+function signOut() {
+
+    /**
+     * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
+     */
+
+    // Choose which account to logout from by passing a username.
+    const logoutRequest = {
+        account: myMSALObj.getAccount({ username: username }),
+        postLogoutRedirectUri: '/signout', // remove this line if you would like navigate to index page after logout.
+
+    };
+
+    myMSALObj.logoutRedirect(logoutRequest);
 }
