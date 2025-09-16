@@ -51,6 +51,7 @@ function signIn() {
 }
 function signOut() {
   msalInstance.logoutRedirect();
+}
 
 function selectAccount() {
 
@@ -105,5 +106,3 @@ function handleResponse(response) {
         //     });
     }
 }
-
-
