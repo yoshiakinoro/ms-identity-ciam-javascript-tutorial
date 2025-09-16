@@ -6,7 +6,7 @@
 const msalConfig = {
     auth: {
         clientId: '657a1a17-89e3-4864-974b-fd9efadac0c4', // This is the ONLY mandatory field that you need to supply.
-        authority: 'https://externaltenant01.ciamlogin.com/a4c3355b-288d-4b4a-b4f0-d5357514717e/ms-identity-ciam-javascript-tutorial', // Replace the placeholder with your tenant subdomain        
+        authority: 'https://externaltenant01.ciamlogin.com', // Replace the placeholder with your tenant subdomain        
         redirectUri: 'https://happy-sky-0e9112400.1.azurestaticapps.net/redirect', // You must register this URI on Microsoft Entra admin center/App Registration. Defaults to window.location.href e.g. http://localhost:3000/
         navigateToLoginRequestUrl: true, // If "true", will navigate back to the original request location before processing the auth code response.
     },
