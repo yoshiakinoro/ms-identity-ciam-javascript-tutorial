@@ -132,4 +132,4 @@ function signOut() {
 
     myMSALObj.logoutRedirect(logoutRequest);
 }
-  */
+
